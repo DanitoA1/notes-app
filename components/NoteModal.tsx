@@ -11,7 +11,7 @@ interface NoteModalProps {
       color: string;
       timestamp: string;
     },
-    index?: number
+    index?: string
   ) => void;
   note?: {
     id: string;
@@ -21,7 +21,7 @@ interface NoteModalProps {
     timestamp: string;
   };
   isEditMode?: boolean;
-  editIndex?: number;
+  editIndex?: string;
 }
 
 const NoteModal: React.FC<NoteModalProps> = ({
@@ -34,7 +34,7 @@ const NoteModal: React.FC<NoteModalProps> = ({
 }) => {
   const [noteTitle, setNoteTitle] = useState<string>("");
   const [noteText, setNoteText] = useState<string>("");
-  const [noteColor, setNoteColor] = useState<string>("bg-orange-300");
+  const [noteColor, setNoteColor] = useState<string>("bg-orange-400");
 
   useEffect(() => {
     if (note && isEditMode) {
@@ -59,7 +59,7 @@ const NoteModal: React.FC<NoteModalProps> = ({
       );
       setNoteTitle("");
       setNoteText("");
-      setNoteColor("bg-orange-300");
+      setNoteColor("bg-orange-400");
       onClose();
     }
   };
@@ -87,38 +87,38 @@ const NoteModal: React.FC<NoteModalProps> = ({
         ></textarea>
         <div className="flex space-x-2 mb-4">
           <button
-            className={`w-6 h-6 rounded-full bg-orange-300 ${
-              noteColor === "bg-orange-300" ? "ring-2 ring-black" : ""
+            className={`w-6 h-6 rounded-full bg-orange-400 ${
+              noteColor === "bg-orange-400" ? "ring-2 ring-black" : ""
             }`}
-            onClick={() => setNoteColor("bg-orange-300")}
+            onClick={() => setNoteColor("bg-orange-400")}
           ></button>
           <button
-            className={`w-6 h-6 rounded-full bg-purple-300 ${
-              noteColor === "bg-purple-300" ? "ring-2 ring-black" : ""
+            className={`w-6 h-6 rounded-full bg-purple-400 ${
+              noteColor === "bg-purple-400" ? "ring-2 ring-black" : ""
             }`}
-            onClick={() => setNoteColor("bg-purple-300")}
+            onClick={() => setNoteColor("bg-purple-400")}
           ></button>
           <button
-            className={`w-6 h-6 rounded-full bg-blue-300 ${
-              noteColor === "bg-blue-300" ? "ring-2 ring-black" : ""
+            className={`w-6 h-6 rounded-full bg-blue-400 ${
+              noteColor === "bg-blue-400" ? "ring-2 ring-black" : ""
             }`}
-            onClick={() => setNoteColor("bg-blue-300")}
+            onClick={() => setNoteColor("bg-blue-400")}
           ></button>
           <button
-            className={`w-6 h-6 rounded-full bg-green-300 ${
-              noteColor === "bg-green-300" ? "ring-2 ring-black" : ""
+            className={`w-6 h-6 rounded-full bg-green-400 ${
+              noteColor === "bg-green-400" ? "ring-2 ring-black" : ""
             }`}
-            onClick={() => setNoteColor("bg-green-300")}
+            onClick={() => setNoteColor("bg-green-400")}
           ></button>
           <button
-            className={`w-6 h-6 rounded-full bg-yellow-300 ${
-              noteColor === "bg-yellow-300" ? "ring-2 ring-black" : ""
+            className={`w-6 h-6 rounded-full bg-yellow-400 ${
+              noteColor === "bg-yellow-400" ? "ring-2 ring-black" : ""
             }`}
-            onClick={() => setNoteColor("bg-yellow-300")}
+            onClick={() => setNoteColor("bg-yellow-400")}
           ></button>
         </div>
         <div className="flex justify-end space-x-2">
-          <button className="px-4 py-2 bg-gray-300 rounded" onClick={onClose}>
+          <button className="px-4 py-2 bg-gray-400 rounded" onClick={onClose}>
             Cancel
           </button>
           <button

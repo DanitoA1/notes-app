@@ -17,53 +17,52 @@ interface Note {
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
-  const [editIndex, setEditIndex] = useState<number | null>(null);
+  const [editNoteId, setEditNoteId] = useState<string | null>(null);
   const [notes, setNotes] = useState<Note[]>([]);
+  const [selectedColor, setSelectedColor] = useState<string>("");
 
   const handleAddNote = (note: Note) => {
     setNotes([...notes, note]);
   };
 
-  const handleEditNote = (note: Note, index?: number) => {
-    if (index !== undefined && index !== null) {
-      const newNotes = [...notes];
-      newNotes[index] = note;
-      setNotes(newNotes);
-    }
+  const handleEditNote = (note: Note) => {
+    setNotes(notes.map((n) => (n.id === note.id ? note : n)));
   };
 
-  const editNote = (index: number) => {
-    setEditIndex(index);
+  const editNote = (id: string) => {
+    setEditNoteId(id);
     setIsEditMode(true);
     setIsModalOpen(true);
   };
 
-  const deleteNote = (index: number) => {
-    setNotes(notes.filter((_, i) => i !== index));
+  const deleteNote = (id: string) => {
+    setNotes(notes.filter((n) => n.id !== id));
   };
 
-  const handleSave = (note: Note, index?: number) => {
-    if (isEditMode && index !== undefined) {
-      handleEditNote(note, index);
+  const handleSave = (note: Note) => {
+    if (isEditMode && editNoteId) {
+      handleEditNote(note);
     } else {
       handleAddNote(note);
     }
     setIsEditMode(false);
-    setEditIndex(null);
+    setEditNoteId(null);
   };
+
+  const handleColorSelect = (color: string) => {
+    setSelectedColor(color);
+  };
+
+  const filteredNotes = selectedColor
+    ? notes.filter((note) => note.color === selectedColor)
+    : notes;
 
   return (
     <div className="min-h-screen bg-white flex">
-      <SideNav />
+      <SideNav onColorSelect={handleColorSelect} />
       <div className="flex-1 p-6">
         <Header />
         <div className="flex space-x-4 mb-6">
-          <a href="#" className="text-gray-700 hover:text-black">
-            Home
-          </a>
-          <a href="#" className="text-gray-700 hover:text-black">
-            Filter by Color
-          </a>
           <a href="#" className="text-gray-700 hover:text-black">
             Filter by Date
           </a>
@@ -71,7 +70,11 @@ export default function Home() {
             Archive
           </a>
         </div>
-        <NotesGrid notes={notes} onEdit={editNote} onDelete={deleteNote} />
+        <NotesGrid
+          notes={filteredNotes}
+          onEdit={editNote}
+          onDelete={deleteNote}
+        />
         <button
           onClick={() => {
             setIsEditMode(false);
@@ -85,9 +88,13 @@ export default function Home() {
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           onSave={handleSave}
-          note={isEditMode && editIndex !== null ? notes[editIndex] : undefined}
+          note={
+            isEditMode && editNoteId
+              ? notes.find((n) => n.id === editNoteId)
+              : undefined
+          }
           isEditMode={isEditMode}
-          editIndex={editIndex || undefined}
+          editIndex={editNoteId || undefined}
         />
       </div>
     </div>

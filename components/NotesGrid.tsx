@@ -10,8 +10,8 @@ interface Note {
 
 interface NotesGridProps {
   notes: Note[];
-  onEdit: (index: number) => void;
-  onDelete: (index: number) => void;
+  onEdit: (id: string) => void;
+  onDelete: (id: string) => void;
 }
 
 const NotesGrid: React.FC<NotesGridProps> = ({ notes, onEdit, onDelete }) => {
@@ -30,13 +30,13 @@ const NotesGrid: React.FC<NotesGridProps> = ({ notes, onEdit, onDelete }) => {
             <span className="text-gray-500 text-sm mt-2">{note.timestamp}</span>
             <div className="flex gap-2">
               <button
-                onClick={() => onEdit(index)}
+                onClick={() => onEdit(note.id)}
                 className="text-gray-600 hover:text-blue-600"
               >
                 <i className="fas fa-edit"></i>
               </button>
               <button
-                onClick={() => onDelete(index)}
+                onClick={() => onDelete(note.id)}
                 className="text-gray-600 hover:text-red-600"
               >
                 <i className="fas fa-trash"></i>
