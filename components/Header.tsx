@@ -4,7 +4,7 @@ import React from "react";
 const Header = () => {
   return (
     <div className="flex justify-between items-center mb-6">
-      <h1 className="text-2xl font-bold">Notes</h1>
+      <h1 className="text-2xl text-black font-bold">Note App</h1>
       <input
         type="text"
         placeholder="Search..."
