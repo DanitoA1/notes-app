@@ -2,10 +2,9 @@
 import React from "react";
 
 interface SideNavProps {
-  onColorSelect: (color: string) => void;
+  filterNotesByColor: (color: string | null) => void;
 }
-
-const SideNav: React.FC<SideNavProps> = ({ onColorSelect }) => {
+const SideNav: React.FC<SideNavProps> = ({ filterNotesByColor }) => {
   const colors = [
     "bg-yellow-400",
     "bg-orange-400",
@@ -16,7 +15,7 @@ const SideNav: React.FC<SideNavProps> = ({ onColorSelect }) => {
 
   return (
     <div className="w-20 bg-gray-100 flex flex-col items-center py-8 space-y-8">
-      <div className="w-14 h-14 bg-gray-200 rounded-full flex items-center justify-center">
+      <div className="w-14 h-14 bg-gray-400 rounded-full flex items-center justify-center">
         <span>Notes</span>
       </div>
       <div className="space-y-4">
@@ -24,13 +23,13 @@ const SideNav: React.FC<SideNavProps> = ({ onColorSelect }) => {
           <div
             key={color}
             className={`w-6 h-6 ${color} rounded-full cursor-pointer`}
-            onClick={() => onColorSelect(color)}
+            onClick={() => filterNotesByColor(color)}
           ></div>
         ))}
       </div>
       <div
         className="w-10 h-10 bg-black rounded-full flex items-center justify-center text-white cursor-pointer"
-        onClick={() => onColorSelect("")}
+        onClick={() => filterNotesByColor("")}
       >
         <span>All</span>
       </div>

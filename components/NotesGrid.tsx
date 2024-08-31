@@ -27,7 +27,9 @@ const NotesGrid: React.FC<NotesGridProps> = ({ notes, onEdit, onDelete }) => {
             <p className="text-black">{note.text}</p>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-gray-500 text-sm mt-2">{note.timestamp}</span>
+            <span className="text-gray-500 text-sm mt-2">
+              {new Date(note.timestamp).toLocaleString()}
+            </span>
             <div className="flex gap-2">
               <button
                 onClick={() => onEdit(note.id)}

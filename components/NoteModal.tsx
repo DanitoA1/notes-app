@@ -9,7 +9,7 @@ interface NoteModalProps {
       title: string;
       text: string;
       color: string;
-      timestamp: string;
+      timestamp?: string;
     },
     index?: string
   ) => void;
@@ -18,10 +18,10 @@ interface NoteModalProps {
     title: string;
     text: string;
     color: string;
-    timestamp: string;
+    timestamp?: string;
   };
   isEditMode?: boolean;
-  editIndex?: string;
+  editId?: string;
 }
 
 const NoteModal: React.FC<NoteModalProps> = ({
@@ -30,7 +30,7 @@ const NoteModal: React.FC<NoteModalProps> = ({
   onSave,
   note,
   isEditMode = false,
-  editIndex,
+  editId,
 }) => {
   const [noteTitle, setNoteTitle] = useState<string>("");
   const [noteText, setNoteText] = useState<string>("");
@@ -46,16 +46,16 @@ const NoteModal: React.FC<NoteModalProps> = ({
 
   const handleSave = () => {
     if (noteTitle.trim() && noteText.trim()) {
-      const timestamp = new Date().toLocaleString();
+      //   const timestamp = new Date().toLocaleString();
       onSave(
         {
           id: note?.id || Date.now().toString(),
           title: noteTitle,
           text: noteText,
           color: noteColor,
-          timestamp,
+          //   timestamp,
         },
-        editIndex
+        editId
       );
       setNoteTitle("");
       setNoteText("");
