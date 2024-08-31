@@ -2,7 +2,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+Create a new env file with the backend host address and ensure the backend is running before starting the frontend as it uses the backend to create required notes.
+
+Then, run the development server:
 
 ```bash
 npm run dev
