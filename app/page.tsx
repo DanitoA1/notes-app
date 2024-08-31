@@ -1,5 +1,4 @@
 "use client";
-// pages/index.tsx
 import React, { useState } from "react";
 import SideNav from "../components/SideNav";
 import Header from "../components/Header";
@@ -7,20 +6,25 @@ import NoteModal from "../components/NoteModal";
 import NotesGrid from "../components/NotesGrid";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
+interface Note {
+  id: string;
+  title: string;
+  text: string;
+  color: string;
+  timestamp: string;
+}
+
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const [editIndex, setEditIndex] = useState<number | null>(null);
-  const [notes, setNotes] = useState<{ text: string; color: string }[]>([]);
+  const [notes, setNotes] = useState<Note[]>([]);
 
-  const handleAddNote = (note: { text: string; color: string }) => {
+  const handleAddNote = (note: Note) => {
     setNotes([...notes, note]);
   };
 
-  const handleEditNote = (
-    note: { text: string; color: string },
-    index?: number
-  ) => {
+  const handleEditNote = (note: Note, index?: number) => {
     if (index !== undefined && index !== null) {
       const newNotes = [...notes];
       newNotes[index] = note;
@@ -38,10 +42,7 @@ export default function Home() {
     setNotes(notes.filter((_, i) => i !== index));
   };
 
-  const handleSave = (
-    note: { text: string; color: string },
-    index?: number
-  ) => {
+  const handleSave = (note: Note, index?: number) => {
     if (isEditMode && index !== undefined) {
       handleEditNote(note, index);
     } else {

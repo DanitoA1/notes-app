@@ -3,8 +3,23 @@ import React, { useState, useEffect } from "react";
 interface NoteModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (note: { text: string; color: string }, index?: number) => void;
-  note?: { text: string; color: string };
+  onSave: (
+    note: {
+      id: string;
+      title: string;
+      text: string;
+      color: string;
+      timestamp: string;
+    },
+    index?: number
+  ) => void;
+  note?: {
+    id: string;
+    title: string;
+    text: string;
+    color: string;
+    timestamp: string;
+  };
   isEditMode?: boolean;
   editIndex?: number;
 }
@@ -17,19 +32,32 @@ const NoteModal: React.FC<NoteModalProps> = ({
   isEditMode = false,
   editIndex,
 }) => {
+  const [noteTitle, setNoteTitle] = useState<string>("");
   const [noteText, setNoteText] = useState<string>("");
   const [noteColor, setNoteColor] = useState<string>("bg-orange-300");
 
   useEffect(() => {
     if (note && isEditMode) {
+      setNoteTitle(note.title);
       setNoteText(note.text);
       setNoteColor(note.color);
     }
   }, [note, isEditMode]);
 
   const handleSave = () => {
-    if (noteText.trim()) {
-      onSave({ text: noteText, color: noteColor }, editIndex);
+    if (noteTitle.trim() && noteText.trim()) {
+      const timestamp = new Date().toLocaleString();
+      onSave(
+        {
+          id: note?.id || Date.now().toString(),
+          title: noteTitle,
+          text: noteText,
+          color: noteColor,
+          timestamp,
+        },
+        editIndex
+      );
+      setNoteTitle("");
       setNoteText("");
       setNoteColor("bg-orange-300");
       onClose();
@@ -44,6 +72,12 @@ const NoteModal: React.FC<NoteModalProps> = ({
         <h2 className="text-xl font-semibold mb-4">
           {isEditMode ? "Edit Note" : "Create a Note"}
         </h2>
+        <input
+          className="w-full text-black p-2 border rounded mb-4"
+          placeholder="Enter note title"
+          value={noteTitle}
+          onChange={(e) => setNoteTitle(e.target.value)}
+        />
         <textarea
           className="w-full text-black p-2 border rounded mb-4"
           rows={4}
