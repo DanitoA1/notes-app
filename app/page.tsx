@@ -94,9 +94,9 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex">
+    <div className="min-h-screen bg-white flex flex-col md:flex-row">
       <SideNav filterNotesByColor={filterNotesByColor} />
-      <div className="flex-1 p-6">
+      <div className="flex-1 p-4 md:p-6">
         <Header onSearch={handleSearch} />
         <NotesGrid
           notes={filteredNotes}

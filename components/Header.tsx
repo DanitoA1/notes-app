@@ -25,7 +25,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
       } catch (error) {
         console.error("Failed to fetch notes:", error);
       }
-    }, 300), // Adjust the debounce delay as needed
+    }, 300),
     [onSearch]
   );
 
@@ -34,14 +34,16 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
   }, [query]);
 
   return (
-    <div className="flex justify-between items-center mb-6">
-      <h1 className="text-2xl text-black font-bold">Note App</h1>
+    <div className="flex flex-col md:flex-row justify-between items-center mb-6">
+      <h1 className="text-xl md:text-2xl text-black font-bold mb-4 md:mb-0">
+        Note App
+      </h1>
       <input
         type="text"
         placeholder="Search..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="border text-black rounded-full px-4 py-1"
+        className="border text-black rounded-full px-4 py-1 w-full md:w-auto"
       />
     </div>
   );

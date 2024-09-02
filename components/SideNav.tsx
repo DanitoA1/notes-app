@@ -1,9 +1,9 @@
-// components/SideNav.tsx
 import React from "react";
 
 interface SideNavProps {
   filterNotesByColor: (color: string | null) => void;
 }
+
 const SideNav: React.FC<SideNavProps> = ({ filterNotesByColor }) => {
   const colors = [
     "bg-yellow-400",
@@ -14,11 +14,11 @@ const SideNav: React.FC<SideNavProps> = ({ filterNotesByColor }) => {
   ];
 
   return (
-    <div className="w-20 bg-gray-100 flex flex-col items-center py-8 space-y-8">
+    <div className="w-full md:w-20 bg-gray-100 flex md:flex-col items-center justify-center md:justify-normal py-4 md:py-8 space-x-4 md:space-x-0 md:space-y-8">
       <div className="w-14 h-14 bg-gray-400 rounded-full flex items-center justify-center">
         <span>Notes</span>
       </div>
-      <div className="space-y-4">
+      <div className="flex md:flex-col space-x-4 md:space-x-0 md:space-y-4">
         {colors.map((color) => (
           <div
             key={color}
