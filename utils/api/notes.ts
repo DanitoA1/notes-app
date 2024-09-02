@@ -1,5 +1,6 @@
 // utils/api/notes.ts
-const API_URL = process.env.API_ENDPOINT || "http://localhost:4000/notes";
+const API_URL =
+  process.env.NEXT_PUBLIC_API_ENDPOINT || "http://localhost:4000/notes";
 
 export async function getNotes() {
   const response = await fetch(API_URL);
